@@ -60,7 +60,7 @@ function extractSubdomain(request: NextRequest): string | null {
 
 export async function middleware(request: NextRequest) {
   const origin = request.headers.get('origin');
-  const country = request.geo?.country || 'US';
+  // const country = request.geo?.country || 'US';
  
   // Define allowed origins dynamically
   const allowedOrigins = process.env.NODE_ENV === 'production' 
