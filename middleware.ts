@@ -6,6 +6,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 // };
 
 const domains = {
+  "/":"pos/",
   "cafe":"pos/",
   "food":"pos/",
   "shop":"pos/",
@@ -31,6 +32,10 @@ function extractSubdomain(request: NextRequest): string | null {
     // Fallback to host header approach
     if (hostname.includes('.localhost')) {
       return hostname.split('.')[0];
+    }
+
+    if (hostname.includes('.vercel.app')) {
+      return "/";
     }
 
     return null;
