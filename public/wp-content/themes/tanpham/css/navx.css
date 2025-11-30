@@ -1,0 +1,323 @@
+﻿/*Nav Desktop*/
+.radiusTT() {
+ -moz-border-radius-bottomright: 9px;
+ -webkit-border-bottom-right-radius: 9px;
+ border-bottom-right-radius: 9px;
+ -moz-border-radius-bottomleft: 9px;
+ -webkit-border-bottom-left-radius: 9px;
+ border-bottom-left-radius: 9px;
+}
+.rMenuBox {
+	position: relative;
+}
+.lineBNavx {
+	background: #FF6600;
+	height: 3px;
+	margin-top: 0px
+}
+.navx {
+	width: 100%;
+	float: left;
+	clear: both;
+	z-index: 99;
+	position: relative;
+	background: #0083C1;
+	display: block;
+}
+.navx h3, .navx h4, .navx h5, .navx h6, .navx h7, .navy h3, .navy h4, .navy h5 {
+	font-size: 1em;
+}
+.navx h4, .navx h5, .navx h6, .navx h7 {
+	font-weight: 500
+}
+.navx a {
+	text-decoration: none;
+	color: #fff;
+	white-space: nowrap;
+}
+.navx ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.navx >ul {
+	float: left
+}
+.menuBox {
+	border-bottom: solid 2px #FF6D0D
+}
+.navx ul ul {
+	display: none;
+	position: absolute;
+	background: #FF6600
+}
+.navx ul ul a {
+	line-height: 30px;
+	padding-right: 10px;
+	padding-left: 10px;
+	color: #fff;
+white-space:nowrap
+}
+.navx ul ul ul {
+	left: 100%;
+	top: 0px;
+}
+.navx ul ul li {
+	position: relative;
+	border-bottom: solid 1px #E05D03;
+	min-width: 190px;
+}
+.navx ul ul li:last-child {
+	border: 0;
+}
+.navx ul ul li:hover {
+	background-color: #0075C0;
+}
+.navx ul ul li:hover> a {
+	color: #fff
+}
+.navx ul li:hover>ul {
+	display: block;
+}
+.navx>ul {
+	clear: both;
+	display: block;
+}
+.navx>ul>li {
+	position: relative;
+	float: left;
+	margin: 0;
+	border-right: solid 1px #0092EF;
+	border-left: solid 1px #0061A0;
+}
+.navx>ul>li:first-child {
+	border-left: 0;
+}
+.navx>ul>li>a {
+	padding-left: 27px;
+	padding-right: 27px;
+	line-height: 40px;
+	text-transform: uppercase;
+	font-weight: normal;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+}
+.navx>ul>li:hover, .navx>ul>li.active, .navx>ul>li:focus {
+	background: #FF6600
+}
+.navx>ul>li:hover>h3>a, .navx>ul>li.active>h3> a, .navx>ul>li:focus>h3>a {
+	color: #fff;
+}
+.navx>ul>li.parent:hover>h3> a {
+	padding-bottom: 11px
+}
+.navx > ul > li > ul {
+	top: 100%;
+	left: 0;
+	margin-top: 0px;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+/* nav mobile*/
+#pull {
+	display: none;
+	position: relative;
+	left: 5px;
+	top: 0px;
+	float: left;
+	height: 30px;
+	width: 30px;
+	text-align: center;
+}
+#pull i {
+	font-size: 23px;
+	top: 3px;
+	color: #fff;
+}
+#btnClose {
+	display: none;
+	cursor: pointer;
+	text-align: right;
+	padding: 5px;
+}
+@media screen and (min-width: 768px) {
+.navx>ul>li>a {
+	line-height: 40px;
+}
+
+}
+@media screen and (max-width: 768px) {
+.navx {
+	border: 0
+}
+.navx>ul>li>h3>a{ color:#000}
+#pull {
+	display: block;
+}
+.parent:after {
+	content: "\00bb";
+	color: #0075C0;
+	margin-left: 20px;
+	padding-right: 30px;
+	font-size: 20px; position: absolute; top:5px; right:5px;
+}
+#btnClose {
+	display: block;
+}
+.navx >ul {
+	display: none;
+	margin-top: 0px;
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	width: 100%;
+	background: #ddd;
+}
+.navx >ul>li {
+	float: none;
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+	border: 0;
+	margin: 0;
+	-webkit-box-shadow: 0 0 0 0;
+	box-shadow: 0 0 0 0;
+	text-align: left;
+	width: 100%;
+	display: inline-block;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.navx >ul>li:hover, .navx >ul>li:active, .navx >ul>li:focus {
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+	border: 0;
+	margin: 0;
+	-webkit-box-shadow: 0 0 0 0;
+	box-shadow: 0 0 0 0;
+}
+.navx >ul>li>a {
+	color: #000
+}
+.navx>ul>li:first-child {
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+}
+.navx ul li, .navx ul, .navx ul ul {
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+}
+.navx ul li {
+	border-bottom: solid #ccc 1px;
+}
+.navx ul li:hover>ul {
+	display: none;
+}
+.navx ul ul {
+	position: relative;
+	clear: both;
+	top: auto;
+	left: auto;
+}
+.navx ul ul li {
+	background: #ddd;
+	border-bottom: #FF6600 solid 1px !important;
+	background: #fff;
+}
+.navx ul ul a {
+	padding-left: 15px;
+	color: #000;
+	line-height: 35px;
+}
+.navx ul ul a:before {
+	content: "\2666";
+	color: #FF6600;
+	margin-right: 10px;
+}
+.navx > ul > li > ul {
+	position: relative;
+	clear: both;
+	top: auto;
+	left: auto;
+	padding-top: 1px;
+}
+.open {
+	border-bottom: 0;
+	padding-bottom: 0px !important;
+}
+.navxMb li {
+	color: #fff
+}
+#btnClose span {
+	color: #3294B9;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	font-size: 1em;
+	border: solid 1px #3294B9;
+	padding: 3px 7px;
+	-webkit-border-radius: 15px 15px 15px 15px;
+	border-radius: 15px 15px 15px 15px;
+}
+#btnClose {
+	color: #3294B9;
+	padding-bottom: 10px
+}
+}
+ @media screen and (max-width: 1200px) {
+}
+ @media screen and (max-width: 800px) {
+}
+.nav_f {
+	list-style: none;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+.nav_f a {
+	white-space: nowrap;
+	color: #fff;
+	text-decoration: none;
+}
+.nav_f a:hover {
+	color: #4fb5b1
+}
+@media screen and (min-width: 768px) {
+.nav_f a+a:before {
+	content: "|";
+	margin-right: 10px;
+	color: #fff !important;
+}
+}
+.menuFooter {
+	font-size: 14px;
+	line-height: 20px;
+}
+.pullf {
+	color: #000;
+	padding: 5px;
+	float: right;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 100%;
+	height: 30px;
+	text-align: right;
+display:none
+}
+.pullf i {
+	margin-right: 5px;
+	color: #fff;
+}
+.popupBox, .innerBox, .fancybox-overlay, .fancybox-overlay div {
+	-webkit-transition: all 0.0s ease-in-out;
+	-moz-transition: all 0.0s ease-in-out;
+	-o-transition: all 0.0s ease-in-out;
+	-ms-transition: all 0.0s ease-in-out;
+	transition: all 0.0s ease-in-out;
+}

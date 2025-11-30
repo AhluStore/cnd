@@ -1,0 +1,63 @@
+﻿a { text-decoration: none }
+.imgDetail { width: 100%; float: left }
+.infoDetail { width: 100%; float: left; margin-left: 0 }
+.infoDetail h1 { border-bottom: solid 1px #ddd; margin-bottom: 10px; padding-bottom: 5px; margin: 10px; margin-left: 0; font-size: 1.3em; color: #246966 }
+.innerInfoDetail { }
+.shortInfo { white-space: pre-line }
+.btnGroup { padding: 5px; text-align: center }
+.btnBuy { background: #bbb; color: #000; font-size: 1.3em; margin: 0 auto; margin-left: 0; line-height: 30px; width: 150px }
+.btnBuy a { color: #000 }
+.priceGroup { padding: 0px 5px;  color: #333; overflow: hidden; }
+.priceGroup span { color: red }
+.newPrice { font-size: 14px; font-weight: bold; font-style: italic; }
+.oldPrice { color: Gray; font-size: 1em; text-decoration: line-through; }
+.listProduct { float: left; width: 100% }
+.infoDetailMore { width: 100%; float: left; padding: 0px 0px; }
+.infoDetailMore h3 { font-weight: bold; font-size: 1.1em; border-bottom: solid 1px #ddd; margin: 0; padding-bottom: 5px; margin-left: 10px; }
+.innerInfoMore { padding: 0px; overflow: hidden }
+.samePro { width: 100%; float: left; padding: 10px 0px; }
+.samePro h3 { font-weight: bold; font-size: 1.1em; border-bottom: solid 1px #ddd; margin-bottom: 10px; padding-bottom: 5px }
+.listProduct .productItem { width: 25%; float: left; }
+.innerListProduct { width: 100%; float: left }
+.product { padding: 5px; }
+.product:hover img { opacity: 1.0 }
+.desProduct { width: 100%; float: left; padding-bottom: 1px; text-align:center}
+.innerProduct { position: relative; border: solid 0px #CACACA; margin: 5px; min-height: 1px; overflow: hidden; }
+.photoProduct { text-align: center; float: left; width: 100%; }
+.product h2 { margin: 0; padding: 0 10px; font-size: 1.1em; margin-top: 10px; }
+.product h2 a { font-weight: normal; font-size: 13px; font-weight: bold; color: #000 }
+.product { width: 100%; float: left; }
+.photoProduct img { margin: 0%; display: inline-block; margin-top: auto; margin-bottom: auto; opacity: 0.95; height: auto;}
+.photoProduct { border: solid 1px #ddd; height: 200px; overflow: hidden }
+.slide .product { padding: 0 }
+.productItem:hover .photoProduct { border: solid 1px #FE6E0D; }
+.innerSamePro { float: left; width: 100%; padding-top: 10px; }
+.price { color: red; font-size: 1.4em; margin-bottom: 10px; }
+.productItem:hover img { }
+.likePro { margin-bottom: 10px }
+.desProduct { padding-bottom: 10px; }
+.infoDetail .priceGroup { margin: 10px 0; padding: 0; font-size: 1.2em }
+.infoDetail .priceGroup .newPrice { font-size: 17px; }
+.detail-info { padding: 10px 15px; }
+.infoDetail h1 { font-family: 'MyriadPro-BoldCond'; color: #0083C1; font-size: 1.8em }
+@media (min-width:768px) {
+.imgDetail { width: 45%; float: left }
+.infoDetail { width: 50%; float: left; margin-left: 3% }
+.photoProduct img { height: 100% }
+.listProduct-small.listProduct .productItem { width: 100%; float: left }
+}
+@media (max-width:1106px) {
+.listProduct .productItem { width: 33.33%;  }
+ 
+}
+@media (max-width:900px) {
+.listProduct .productItem { width: 50%;  }
+ 
+}
+ @media (max-width:768px) {
+.listProduct .productItem { width: 100%; height:auto }
+.listProduct-small .productItem { width: 100% }
+.photoProduct { width: 30%; float: left; height:auto}
+.desProduct { width: 68%; float: right; text-align: left !important }
+.product h2{ height:auto}
+}
