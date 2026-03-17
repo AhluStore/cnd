@@ -1,0 +1,52 @@
+ #GetGift{}
+    #GetGift ul .item{
+      display:flex;
+      flex-direction:row;
+    }
+    #GetGift ul li {
+      position:relative;
+          margin: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+    #GetGift ul li p{
+      line-height: 18px;
+      margin-bottom: 4px;
+    }
+    #GetGift ul li.active{
+      opacity:0.8;
+    }
+    #GetGift ul li:last-child{
+      border-bottom: none
+    }
+    #GetGift ul li .item{
+      margin: 8px 0;
+    }
+    #GetGift ul li .item img{
+      width:55px;
+      height:55px;
+    }
+
+    #GetGift ul li .info{
+      flex:1;
+      margin:0 8px;
+    }
+
+    #GetGift ul li.active:after{
+      content:"✅";
+      position: absolute;
+      right:0;
+      bottom: 0;
+      z-index: 10;
+    }
+
+
+.infoship >*{
+   margin-bottom: 8px;
+    border-radius: 8px;
+    border: 1px solid #f3f3f3;
+    padding: 8px 12px;
+}
+
+.infoship .active{
+   border-color: #607D8B;
+}

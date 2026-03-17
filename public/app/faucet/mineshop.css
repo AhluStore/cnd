@@ -1,0 +1,21 @@
+.orders{}
+.orders .orderitem{
+	font-size: 14px;
+    background-color: #fff;
+	border-radius: 8px;
+	margin-bottom: 16px;
+	color:#768096;
+	padding: 8px;
+}
+.orders .orderitem .iheader{
+	border-bottom: 1px solid #eee;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+.orders .orderitem .ibody{}
+.orders .orderitem .ibody .lr{
+	justify-content: space-between;
+	margin: 6px 0;
+}
+.orders .orderitem .ifoot{}

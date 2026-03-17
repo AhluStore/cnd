@@ -1,0 +1,55 @@
+
+.wrapaccount{
+
+ }       
+          .wrapaccount .boxinfo{
+                     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+              
+          }
+          .wrapaccount .boxinfo .mblock{
+            margin-bottom:24px;
+          }
+          .boxa{
+            margin-bottom:24px;
+          }
+          .wrapaccount .boxinfo .iconblock{
+                border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+        background-color: #ccc;
+    align-items: center;
+    justify-content: center;
+          }
+
+.btnactions{
+      display:flex;
+   }
+   .btnactions>*{
+     flex-grow: 1;
+   }
+
+   .vlockavatar{
+    margin-bottom: 24px;
+   }
+   .myid{
+    width: 100%;
+    white-space: nowrap;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+   }
+   .myid>*{
+     width: 215px;
+     text-align:center;
+         display: inline-block;
+             margin-right: 16px;
+   }
+
+
+.panel{}

@@ -1,0 +1,58 @@
+ <div class="rows scrollable rowwifi">
+                <?php
+                
+                  $lists = [
+                    
+                     ["lat"=>"10.7849973","lng"=>"106.6223818","url"=>"https://www.google.com/maps/place/GoTa+Coffee/@10.7849973,106.6223818,115m/data=!3m1!1e3!4m6!3m5!1s0x31752d0001fc2a33:0x6a5c264933d859d6!8m2!3d10.7849973!4d106.6227674!16s%2Fg%2F11wv26g6z4?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"45 Lê Lư, Phú Thọ Hoà, Tân Phú, Thành phố Hồ Chí Minh, Vietnam","desc"=>"","name"=>"gotacoffee45","password"=>"gotacoffee"],
+                    ["lat"=>"10.8127104","lng"=>"106.6206973","url"=>"https://www.google.com/maps/place/200+Nguy%E1%BB%85n+H%E1%BB%AFu+Ti%E1%BA%BFn,+T%C3%A2y+Th%E1%BA%A1nh,+T%C3%A2n+Ph%C3%BA,+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh,+Vietnam/@10.8127104,106.6206973,771m/data=!3m2!1e3!4b1!4m6!3m5!1s0x31752be72b2d73d1:0x7b0a91627dc83734!8m2!3d10.8127104!4d106.6232722!16s%2Fg%2F11gyy24bgs?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"200 Nguyễn Hữu Tiến, Tây Thạnh, Tân Phú, Thành phố Hồ Chí Minh, Vietnam","desc"=>"","name"=>"Viva NHT","password"=>"88888888"],
+                    ["lat"=>"10.7857475","lng"=>"106.6219495","url"=>"https://www.google.com/maps/place/Nova+Coffee/@10.7857475,106.6219495,20.46z/data=!4m6!3m5!1s0x31752db298d6f567:0x87480676090de66!8m2!3d10.7857041!4d106.6219249!16s%2Fg%2F11v080v3z_?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"71 Lê Thiệt, Phú Thọ Hoà, Tân Phú, Thành phố Hồ Chí Minh, Vietnam","desc"=>"","name"=>"Nova Coffee","password"=>"novanova"],
+                    ["lat"=>"10.8194714","lng"=>"106.6827496","url"=>"https://www.google.com/maps/place/116+D.+L%C3%AA+L%E1%BB%A3i,+Ph%C6%B0%E1%BB%9Dng+1,+G%C3%B2+V%E1%BA%A5p,+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh,+Vietnam/@10.8194714,106.6827496,17z/data=!3m1!4b1!4m6!3m5!1s0x317528e5b20a46f9:0x484dc5acac12873d!8m2!3d10.8194714!4d106.6853245!16s%2Fg%2F11ytv7tcsh?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"116 D. Lê Lợi, Phường 1, Gò Vấp, Thành phố Hồ Chí Minh, Vietnam","desc"=>"","name"=>"Lolo Coffee","password"=>"116leloi"],
+
+                    ["lat"=>"10.8134232","lng"=>"106.6206264","url"=>"https://www.google.com/maps/place/205+%C4%90%C6%B0%E1%BB%9Dng+T%C3%A2y+Th%E1%BA%A1nh,+T%C3%A2y+Th%E1%BA%A1nh,+T%C3%A2n+Ph%C3%BA,+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh+700000,+Vietnam/@10.8134232,106.6206264,17z/data=!3m1!4b1!4m6!3m5!1s0x31752be7334417a3:0x36913a7d0f2147eb!8m2!3d10.8134232!4d106.6232013!16s%2Fg%2F11j8h00wwn?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"205 Đường Tây Thạnh, Tây Thạnh, Tân Phú, Thành phố Hồ Chí Minh 700000, Vietnam","desc"=>"","name"=>"T77 Coffee","password"=>"t7756789"],
+                    ["lat"=>"10.8104743","lng"=>"106.6242331","url"=>"https://www.google.com/maps/place/117+Nguy%E1%BB%85n+H%E1%BB%AFu+Ti%E1%BA%BFn,+P,+T%C3%A2n+Ph%C3%BA,+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh,+Vietnam/@10.8104743,106.6242331,147a,37y,45t/data=!3m1!1e3!4m15!1m8!3m7!1s0x31752be124cd5a85:0xb7e6d7484e878933!2zMTE3IE5ndXnhu4VuIEjhu691IFRp4bq_biwgUCwgVMOibiBQaMO6LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!3b1!8m2!3d10.8117012!4d106.6241856!16s%2Fg%2F11nnkwt33m!3m5!1s0x31752be124cd5a85:0xb7e6d7484e878933!8m2!3d10.8117012!4d106.6241856!16s%2Fg%2F11nnkwt33m?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"117 Nguyễn Hữu Tiến, P, Tân Phú, Thành phố Hồ Chí Minh, Vietnam","desc"=>"","name"=>"Tiểu Phụng","password"=>"0908257574T"],
+                    ["lat"=>"10.8273678","lng"=>"106.6405082","url"=>"https://www.google.com/maps/place/C%C3%A0+ph%C3%AA+TN+24%2F24/@10.8273678,106.6405082,107a,47.8y,45.08t/data=!3m1!1e3!4m6!3m5!1s0x31752900363d5dc3:0xfe398d1cebbca70e!8m2!3d10.828128!4d106.640524!16s%2Fg%2F11yk7rp92p?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"103 Trần Thánh Tông, Phường 15, Tân Bình, Thành phố Hồ Chí Minh","desc"=>"","name"=>"TN Coffee _5G","password"=>"88888888"],
+
+                    ["lat"=>"10.8193814","lng"=>"106.632614","url"=>"https://www.google.com/maps/@10.8193814,106.632614,140m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"26 Đ. Trần Thái Tông, Phường 15, Tân Bình, Thành phố Hồ Chí Minh","desc"=>"","name"=>"Milano Trần Thái Tông","password"=>"23456789"],
+                    ["lat"=>"10.8193814","lng"=>"106.632614","url"=>"https://www.google.com/maps/@10.8193814,106.632614,140m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"47A Đ. Trần Thái Tông, Phường 15, Tân Bình, Thành phố Hồ Chí Minh","desc"=>"","name"=>"Diep","password"=>"99999999"],
+                    ["lat"=>"10.871572","lng"=>"106.6493837","url"=>"https://www.google.com/maps/place/C%C3%A0+ph%C3%AA+%C4%90%C3%A1/@10.871572,106.6493837,771m/data=!3m2!1e3!4b1!4m6!3m5!1s0x317529000fc43f8d:0x8d2fd04aff3fefcc!8m2!3d10.871572!4d106.6493837!16s%2Fg%2F11wnzrs64k?hl=vi-VN&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D","image"=>"https://cdn-icons-png.flaticon.com/128/924/924514.png","address"=>"75/1 Tổ 3 - KP2, Thới An, Quận 12, Thành phố Hồ Chí Minh","desc"=>"","name"=>"Coffee Đá","password"=>"xincamon"]
+                  ];
+                  // echo json_encode($lists,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                  foreach ($lists as $k => $item) {
+                    $lists[$k]["report"]=[
+                      "comments"=> [],
+                      "like"=> [],
+                      "rate"=> []
+                    ];
+                    $lists[$k]["status_log"]=[];
+                    $lists[$k]["created_date"]="2026-01-27 04:16:08";
+                    $lists[$k]["slug"]="";
+                    $lists[$k]["userid"]=0;
+
+                    $img = $item["image"]?'<img src="'.$item["image"].'" width="24" height="24" />':'<span class="w-40 avatar gd-primary">'.strtoupper($item["name"][0].$item["name"][1]).'</span>';
+                     echo '<div class="list-item grid-2" data-info=\''.json_encode($item).'\' data-id="'.$k.'" data-item-sortable-id="0" draggable="true" role="option" aria-grabbed="false" style="">
+                        <div><a href="#" data-abc="true">'.$img.'</a></div>
+                        <div class="flex-col"> 
+                            <div  class="item-author text-color" data-abc="true">'.$item["name"].'</div>
+                            <div class="item-except text-muted truncate">'.$item["address"].'</div>
+                        </div>
+                        <div class="no-wrap">
+                            <div class="item-date text-muted d-none d-md-block btn no btn-primary btn-small btnview">Xem mật khẩu</div>
+                        </div>
+                        <div class="actions">
+                            <div class="item-action dropdown"> <a href="#" data-toggle="dropdown" class="text-muted" data-abc="true"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                        <circle cx="12" cy="12" r="1"></circle>
+                                        <circle cx="12" cy="5" r="1"></circle>
+                                        <circle cx="12" cy="19" r="1"></circle>
+                                    </svg> </a>
+                                <div class="dropdown-menu dropdown-menu-right animate__animated animate__bounce" role="menu"> 
+                                    <a class="dropdown-item" target="_blank" href="'.$item["url"].'" data-abc="true">Xem Map</a>
+                                    <a class="dropdown-item download" href="http://faucet.donggiatri.click/a.apk"  data-abc="true">Tải App </a>
+                                     
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                  } 
+                  echo json_encode($lists,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+                  ?>
+      </div>

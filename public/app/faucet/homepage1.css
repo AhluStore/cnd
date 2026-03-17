@@ -1,0 +1,14 @@
+.gradient-blue {
+    background: linear-gradient(135deg, #0066CC 0%, #003399 100%);
+}
+.gradient-banner {
+    background: linear-gradient(180deg, #001a4d 0%, #003d99 50%, #0066cc 100%);
+}
+.icon-bg {
+    background: linear-gradient(135deg, #e6f0ff 0%, #cce0ff 100%);
+}
+.promo-bg {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff4500 100%);
+}
+
+#homepage1 .modal-body {padding: 0}
