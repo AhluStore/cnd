@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <base href="https://f7.donggiatri.click/users/demo/f7vay/dist/" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="apple-mobile-web-app-title" content="My App">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="viewport-fit=cover,width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="auth-token" content="">
+
+  <!-- Color theme for statusbar (Android only) -->
+  <meta name="theme-color" content="#2196f3">
+ 
+   <title>VayMB</title>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+
+<style>
+.loadingabc {
+  height: 0;
+  width: 0;
+  padding: 15px;
+  border: 6px solid #ccc;
+  border-right-color: #888;
+  border-radius: 22px;
+  -webkit-animation: rotate 1s infinite linear;
+  /* left, top and position just for the demo! */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+@-webkit-keyframes rotate {
+  /* 100% keyframe for  clockwise. 
+     use 0% instead for anticlockwise */
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+
+body:not(.loaded)>*{
+    display:none;
+}
+.flashcreen
+{
+    display: block !important;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.loaderbar{
+    position: absolute;
+  left: 50%;
+  bottom: 5%;
+}
+</style>
+ <script>
+var AppConfig = { 
+	"logo":"https://f7.donggiatri.click/users/f7vay/dist/assets/logo.png",
+  
+  "theme":{
+    "bg":"#fff",
+    "color":"#333"
+  },
+  "device":{
+     "desktop":1,
+     "mobile":1
+  },
+  "intro":{
+    "html":"",
+    "video1":"https://f7.donggiatri.click/users/demo/knc/video.mp4",
+    "bg":"https://images.unsplash.com/photo-1512551980832-13df02babc9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80",
+    "logo":"https://f7.donggiatri.click/users/demo/knc/assets/logo.png?t=1",
+    "nameApp":"NHN",
+    "version":"version 1.0"
+  },
+    "upload":{
+     "url":"https://f7.donggiatri.click/users/demo/f7vay/upload.php"
+  },
+  "domain":{
+    "version":"1.0",
+    "local":0,
+    "islocal":0,
+    "typelocal":"beta", 
+    "beta":"https://f7.donggiatri.click/users/demo/f7vay/dist/",
+    "api":"https://f7.donggiatri.click/users/demo/f7vay/api/",
+    "live":"https://f7.donggiatri.click/users/demo/f7vay/dist/",
+    "admin":"https://f7.donggiatri.click/users/demo/f7vay/admin/",
+    "root":"https://f7.donggiatri.click/users/demo/f7vay/",
+    "upload":"https://f7.donggiatri.click/users/demo/f7vay/uploads/"
+  },
+  "url_f7":"https://f7.donggiatri.click/users/demo/f7vay/dist/",
+  "version":{
+    "check":0, 
+    "code":"1.0",
+    "android":"https://play.google.com/store/apps/details?id=com.ahlustore.social&pli=1",
+    "ios":"https://apps.apple.com/vn/app/nsocial/id6444297013"
+  }, 
+  "ads":{
+    "autopopup":0,
+    "link":"https://developers.google.com/admob/android/test-ads",
+    "android":{
+      "enable":1,
+      "popupt":"ca-app-pub-3940256099942544/1033173712",
+      "popup":"ca-app-pub-1730627692868260/6255646185",
+      "banner":"ca-app-pub-1730627692868260/5521149016"
+    },
+    "ios":{
+      "enable":0,
+      "popup":"ca-app-pub-8447444781537844/2375667737",
+      "banner":"ca-app-pub-8447444781537844/4702448175"
+    }
+  },
+  "account":{
+    "username1":"",
+    "username":"demo@gmail.com",
+    "password":"123123",
+    "password1":""
+  },
+  "storage":{
+      "io":"https://storage.donggiatri.click",
+      "apikey":"test_xxx"
+  },
+  "chanel":{
+      "io":"https://chanel.donggiatri.click",
+      "apikey":"test_xxx"
+  },
+  "server":{
+    "firenase":{
+      "io":"https://tu-ech-default-rtdb.firebaseio.com"
+    },
+    "socket":{
+      "io":"https://io.donggiatri.click:50003",
+      "port":50003
+    },
+    "apiUrl":"https://io.donggiatri.click:50003",
+    "apiUrl1":"http://localhost:50003",
+    "defaultImageUri": "https://via.placeholder.com/1900x680/CCCCCC/FFFFFF/?text=NSocial",
+      "cndUrl": "https://cnd.donggiatri.click/upload.php",
+      "upload":"https://chat.donggiatri.click/upload.php?"
+  },
+  "nameApp":"Vay MB",
+	"title":"Vay MB",
+	"name": "VayMB", 
+	"apikey":"demo",
+	  "react-native-google-mobile-ads": {
+	    "android_app_id": "ca-app-pub-1730627692868260~2775566177",
+	    "ios_app_id": "ca-app-pub-8529695879231140~2535990115"
+	},
+  "wc":{
+    "domain":"acua.donggiatri.click"
+  }
+};
+window.sdk={
+  user_sesion : "VayMB__u", 
+};
+ window.root_url = '/'; 
+ 
+window.global = {
+  user_sesion : window.sdk.user_sesion
+};
+ function site_url(url){
+  return window.root_url+"/view/"+(url||"");
+}
+
+function site_url_root(url){
+  return window.root_url+'/'+(url||"");
+}
+
+function site_url_data(url){
+  return AppConfig.domain.root+"mockdata/"+url;
+}
+
+function site_url_ajax(url){
+  return `${AppConfig.domain.api}/${url}`;
+}
+function postajax(ac,data,f){
+  return new Promise(function(a,b){
+
+      post(site_url_ajax(ac),data,function(r){
+         if(f)f(r);
+         a(r);
+      },true);
+  });
+}
+
+
+function postajaxuser(ac,data,f){
+  return new Promise(function(a,b){
+
+      post(`${AppConfig.domain.api}/user/${ac}`,data,function(r){
+         if(f)f(r);
+         a(r);
+      },true);
+  }); 
+}
+function setStateApp(data){
+   if(app.config){
+      if(typeof data=="object"){
+        app.config = $.extend(app.config,data,true);
+      }else  if(typeof data=="function"){
+        app.config = $.extend(app.config,data(app.config),true);
+      }
+   }
+}
+ function LoadCSS(e){return new Promise((function(n,t){var o=document.createElement("link");o.rel="stylesheet",o.href=e,document.head.appendChild(o),o.onload=function(){n()}}))}function LoadJS(e){return new Promise((function(n,t){var o=document.createElement("script");o.src=e,document.head.appendChild(o),o.onload=function(){n()}}))}
+
+
+ 
+window.onload = function(){
+
+var array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
+
+      function randomElement() {
+        return array[Math.floor(array.length * Math.random())];
+      }
+
+      function randomColor() {
+        let colour = "#";
+        for (var i = 0; i < 6; i++) {
+          colour += randomElement();
+        }
+
+        return colour;
+      }
+
+      function randomAngle() {
+        return Math.floor(360 * Math.random());
+      }
+
+let newBg =
+          "linear-gradient(" +
+          randomAngle() +
+          "deg, " +
+          randomColor() +
+          ", " +
+          randomColor() +
+          ", " +
+          randomColor() +
+          ")";
+    document.querySelector(".flashcreen").style.background = newBg;
+
+    document.body.insertAdjacentHTML("beforeend", templateApp);
+
+     function ready_go(r){ 
+             if(app){
+               app.name = r.name||r.nameApp||r.title;
+               
+               app.icon = r.icon||r.logo;
+               app.id = r.id||r.bundleId;
+
+               app.config = r;
+
+               document.title = app.name;
+                window.sdk.domain= r.domain.live;
+
+                window.sdk.domain_api= r.domain.api;
+
+                if(window.AppStorege&&window.AppStorege.refetch){
+                    window.AppStorege.refetch();
+                  }
+
+                /*
+                if(document.location.origin=='file://'){
+                   window.root_url = document.location.pathname.split('/').slice(0,-1).join('/');
+                }else{
+                  if(!document.location.host.includes('localhost')){
+                    window.root_url = r.domain.live;
+                  } 
+                }
+
+                if(!document.location.host.includes('localhost')){
+                    window.root_url = r.domain.live;
+                } 
+                */
+
+
+               $(document).trigger("Config",[app]); 
+
+         
+              
+             
+            }
+             
+    }
+    function ready(){
+      
+     
+      runmain(function(u,pointer){
+
+         if(u){
+               document.querySelector('meta[name="auth-token"]').setAttribute("content",u.passkey); 
+            }
+         $(document).trigger('onInit');
+
+           routeEnableAsync();
+           if(typeof AppConfig =='object'){
+              ready_go(AppConfig);
+           
+           }
+     
+         $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+  
+              var auth =$('[name="auth-token"]').attr("content");
+              if(auth){
+                jqXHR.setRequestHeader( 'auth-token',auth);
+              }
+
+      
+         });
+
+          // if(u){
+          loadredux();
+          var first= 0;
+        function router(path){
+            if(path&&path!="/"){
+              var abc =new RegExp("/san-pham/([^\/]+)", "ig").exec(path);
+              if(abc){ 
+                 var slug = abc[1];
+                 return `/shop/product/${slug}/`;
+                 
+                  
+              }
+
+              if(!abc){
+                abc =new RegExp("/danh-muc/([^\/]+)", "ig").exec(path);
+                if(abc){ 
+                   var slug = abc[1];
+                   return `/shop/category/${slug}/`; 
+                }
+              }
+              //404
+              if(!abc){
+
+                  var f = app.routes.filter(function(v){
+                    return v.path ==path;
+                  });
+                  return f.length?path:`/error/`; 
+              } 
+               
+            }
+            return "";
+        }
+        $(document).on("onDeeplink",function(e,uri){
+            var a = document.createElement("a");
+            a.href=uri; 
+            var path =a.pathname;
+            path = router(path);
+            if(path){
+              app.pointer = path; 
+              RouterReset(['/home/',app.pointer]); 
+               app.pointer.navigate();
+            }
+        }).on("onNotification",function(e,data){
+           if(data.url){
+              var a = document.createElement("a");
+              a.href=data.url; 
+              var path =a.pathname;
+              path = router(path);
+              if(path){
+                app.pointer = path; 
+                RouterReset(['/home/',app.pointer]); 
+                 app.pointer.navigate(data);
+              }
+           }else{
+             //detech data has event
+             if(data.event){
+               $(document).trigger(data.event,[data]);
+             }
+           }
+        }).on("home_Before", function (event, e, page) {
+            if(first==0){
+                first=1;
+           
+                $('body').addClass('loaded'); 
+                //  var u = window.user.hasLogin();
+                // if(!u){
+                //     '/user/login/'.navigate();
+                // }else{
+                      //http://localhost:3000/san-pham/kho-muc-size-35-con-kg/
+                     
+                        //http://localhost:3000/xem-tac-pham-bach-xa.TA202408298607
+                        // var abc =new RegExp("/san-pham/([^\.]+)\.TA([0-9a-z]+)", "ig").exec(document.location.pathname);
+                        var path =document.location.href.includes("localhost")||document.location.href.includes("file://")?document.location.pathname: document.location.href.replace(site_url_root(),"/");
+                        path = router(path);
+                        if(path){
+                          app.pointer = path; 
+                          RouterReset(['/home/',app.pointer]); 
+                           app.pointer.navigate();
+                        }
+                    
+                // }
+                $('.loadingabc').fadeOut("slow",function(){
+                    $(this).remove();
+                }); 
+            } 
+      });
+          
+          if(document.location.hash&&document.location.hash!="#"){
+             pointer= document.location.hash.replace("#","");
+          }else{
+
+             // var path = document.location.pathname.replace(window.root_url_path,"");
+             // if(path!="/"){
+             //   pointer = path;
+             // }
+          }
+
+
+
+          if(pointer[pointer.length-1]!="/"){
+              pointer = pointer+"/";
+          }
+
+          app.pointer = pointer;
+
+          return '/home/';
+      });
+    }
+
+
+    function readysrc(options){
+    var l = options.data.length;
+    var c= 0;
+    Promise.all(options.data.map(function(v,i){
+     
+      (function(n){
+          v.then(function(){ 
+            // c += ((n/l)*100);
+            if(options.progress){
+                options.progress(((++c/l)*100),n,l);
+            }
+            
+        });
+      })(i+1);
+      return v;
+    })).then(function(){
+        if(options.progress){
+            options.progress(c,l,l);
+        }
+       options.callback();
+    }); 
+}
+
+LoadJS("./build/jscore.js?t=176e8605").then(function(){
+   
+
+     var all = [];
+      all.push(LoadJS("./build/app.min.js?t=1786e2222"));
+  all.push(LoadCSS("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"));
+  all.push(LoadCSS("./build/csscore.css?t=176467605")); 
+  all.push(LoadCSS("./build/app.min.css?t=176467605"));
+ 
+  
+
+  readysrc({
+        data:all,
+        progress : function(per,i,total){
+            console.log(per,i,total);
+
+            document.querySelector(".loaderbar").innerHTML=`${per.toFixed(2)}%`;
+        },
+        callback : function(){
+          LoadCSS("./build/font.css?t=1758172450476").then(function(){});
+          
+
+            //listen allbuild done
+            $(document).on('onInit',function(){
+               
+            });
+            AppStorege.ping().then(ready);
+
+            var first= 0;
+            $(document).on("home_Init", function (event, e, page) {
+                if(first==0){
+                    first=1;
+               
+                    
+                     var u = window.user.hasLogin();
+                    if(!u){
+                        '/user/login/'.navigate();
+                    }else{
+                        app.pointer.navigate();
+                    }
+                    $('.flashcreen').fadeOut("slow",function(){
+                        $(this).remove();
+                         window.rebuild($('body').addClass('loaded')); 
+                    }); 
+
+                } 
+            });
+         
+ 
+        }
+      }); 
+});
+   
+   
+}
+var templateApp = `<div class="barmenudesktop">
+      <div class="logo" data-router="/home/">
+         <img data-src="../assets/logo.png" alt="">
+      </div>
+      <nav>
+    <ul>
+        <li class="my-5"><a href="/home/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_mining.svg" alt="">
+                    </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">Trang chủ</div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/user/account/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_profile.svg" alt="">  
+                      </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">Tài khoản</div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/wallet/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_wallet.svg" alt="">  
+                      </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-green-3F0">Wallet</div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/news/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_donate.svg" alt="">  
+                    </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">Tin tức</div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/nft/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_ntf.svg" alt=""> 
+                      </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">NFT</div>
+                        <div class="bg-yellow-FCD535 rounded-xl w-[43px] h-[16px] flex justify-center ml-2"><span class="text-[11px] font-normal">New!</span></div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/nft-market-place/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_ntf_marketplace.svg" alt=""> 
+                    </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">NFT Marketplace</div>
+                        <div class="bg-yellow-FCD535 rounded-xl w-[43px] h-[16px] flex justify-center ml-2"><span class="text-[11px] font-normal">Soon!</span></div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/transaction/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_transaction.svg" alt="">
+                      </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">Kiếm điểm</div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/shortvideo/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_leaderboard.svg" alt="">
+                    </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">Xem video</div>
+                    </div>
+                </div>
+            </a></li>
+        <li class="my-5"><a href="/page/contact/">
+                <div class="grid grid-cols-12 gap-3">
+                    <div class="col-span-1">
+                      <img src="../assets/icon_connect.svg" alt="">
+                      </div>
+                    <div class="col-span-11 flex items-center flex-1">
+                        <div class="font-inter font-normal text-sm ml-4 flex-1 text-gray-A5A8B4">Liên hệ</div>
+                    </div>
+                </div>
+            </a></li>
+    </ul>
+</nav>
+</div>
+   <div id="app">
+    <div class="statusbar"></div>
+    <div class="panel panel-left panel-cover" style="    width: 315px;">
+      <div class="page page-init">
+        <div class="page-content">
+          <a href="#" class="profile-block panel-close">
+            <div class="" align="center">
+              <div class="rounded-white top-3x-2">
+                <img  src="../assets/logo.png">
+              </div>
+              <div class="color-white top-3x bottom-2x">
+                WC
+              </div>
+            </div>
+          </a>
+          <div class="clear"></div>
+          <div class="list links-list top-2x">
+            <ul class="accordion-list">
+              <!-- <li>
+                <a href="/pevaluacion/" data-view=".view-main" class="panel-close">
+                  <div class="item-title">
+                    <i class="far fa-check-circle"></i> CheckList
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/pevaluacion/" data-view=".view-main" class="panel-close">
+                  <div class="item-title">
+                    <i class="far fa-check-circle"></i> Puntos de Evaluación
+                  </div>
+                </a>
+              </li> -->
+              <!-- <li>
+                <a href="/resolver-ticket/" data-view=".view-main" class="panel-close">
+                  <div class="item-title">
+                    <i class="far fa-check-circle"></i> Tickets
+                  </div>
+                </a>
+              </li> -->
+
+               
+            </ul>
+          </div>
+         
+          <div class="footpanel">
+             
+          </div>
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="view view-main view-init ios-edges" data-url="/">
+      <!-- page default -->
+      
+
+      <!--  -->
+    
+  </div> 
+  </div>`;
+</script>
+
+  
+  
+</head>
+
+<body translate="no" class="style1">
+   <div class="flashcreen h-100">
+         <div class="loadingabc"></div>
+   
+        <div class="loaderbar"></div>
+   </div>
+</body>
+
+</html>
