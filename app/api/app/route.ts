@@ -80,7 +80,27 @@ export async function POST(request: NextRequest) {
   const body = bodyabc(request);
 
   if(body){
-     
+    let url = "https://f7.donggiatri.click/users/demo/pluto/dist/";
+ 
+    switch (body._app_) {
+      case 'com.faucet.wp':
+        // $url = "https://woo.posfin.click/"; 
+        url = "https://f7.donggiatri.click/users/demo/wc/dist/"; 
+      break; 
+      case 'com.faucet.chat':
+        url = "https://chat.donggiatri.click/"; 
+      break; 
+      case 'com.faucet.ship':
+        url = "https://f7.donggiatri.click/users/demo/aship/dist/"; 
+      break; 
+      case 'com.faucet.pos':
+        url = "https://cafe.posfin.click/";
+      break; 
+    }
+    url = "https://f7.donggiatri.click/users/demo/pluto/dist/?m";
+
+
+    return NextResponse.rewrite(new URL(url, request.url));
   }
   
   //////////////////////////
