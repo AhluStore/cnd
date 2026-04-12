@@ -7,17 +7,24 @@ const appconfig={
    domainapi :'https://f7.donggiatri.com/users/demo/pluto/'
 };
 
-// async function secretGET(request: NextRequest) {
-//   return new Response(JSON.stringify({ secret: 'Here be dragons' }), {
-//     headers: { 'Content-Type': 'application/json' },
-//   });
-// }
- 
+ async function secretGET(request: NextRequest) {
+   return new Response(JSON.stringify({ secret: 'Here be dragons' }), {
+    headers: { 'Content-Type': 'application/json' },
+   });
+ }
 // export const GET = withAuth(secretGET);
 
-export async function GET(request: NextRequest) {
-  let url  = request.nextUrl.pathname;
+async function bodyabc(request){
+  let body = await request.json();
+  const formData = await request.formData();
+  let all = Object.fromEntries(formData); 
 
+  for(var i in all){
+    body[i] = all[i];
+  }
+  return body;
+}
+async function Proxy(request,otps){
   // const headersList = await headers();
   // const referer = headersList.get('referer');
  
@@ -30,8 +37,23 @@ export async function GET(request: NextRequest) {
     headers["auth-token"]  =auth;
   }
 
+  let data = null;
+  if(otps.method=="get"){
+    data = await axios.get(otps.url);
+  }else{
+    data = await axios.post(otps.url,otps.data);
+  }
+  return data;
+}
+
+
+
+export async function GET(request: NextRequest) {
+  let url  = request.nextUrl.pathname;
+  const body =   Object.fromEntries(request.nextUrl.searchParams.entries());
+
   url = appconfig.domainapi+pathname;
-  let data = await axios.get(url);
+  let data = await Proxy(request,{url:url,data:body,method:"get"));
 
   let transformed = typeof data.data=="object"? JSON.stringify(data.data):data.data;
  
@@ -40,52 +62,16 @@ export async function GET(request: NextRequest) {
   });
 }
 
-/*
-/api/users/
- */
-// export async function GET(request: Request) {
 
-//   // For example, fetch data from your DB here
-//   const users = [
-//     { id: 1, name: 'Alice' },
-//     { id: 2, name: 'Bob' }
-//   ];
-//   return new Response(JSON.stringify(users), {
-//     status: 200,
-//     headers: { 'Content-Type': 'application/json' }
-//   });
-// }
-
-async function bodyabc(request){
-  let body = await request.json();
-  const formData = await request.formData();
-  let all = Object.fromEntries(formData); 
-
-  for(var i in all){
-    body[i] = all[i];
-  }
-  return body;
-}
  
 export async function POST(request: NextRequest) {
  let url  = request.nextUrl.pathname;
-
-  // const headersList = await headers();
-  // const referer = headersList.get('referer');
  
-  // 2. Using the standard Web APIs
-  const auth = request.headers.get('auth-token');
-  const pathname = request.headers.get('x-next-pathname');
-
   const body = bodyabc(request);
+ 
 
-  if(body){
-     
-  }
-  
-  //////////////////////////
-  url = appconfig.domainapi+pathname; 
-  let data = await axios.post(url,{});
+  url = appconfig.domainapi+pathname;
+  let data = await Proxy(request,{url:url,data:body,method:"post"));
 
   let transformed = typeof data.data=="object"? JSON.stringify(data.data):data.data;
   
