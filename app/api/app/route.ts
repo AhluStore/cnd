@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server';
 import { cookies, headers } from 'next/headers';
 import { withAuth } from '@/lib/with-auth';
  import axios from 'axios';
+ import { type NextRequest, NextResponse } from 'next/server';
 
 const appconfig={
    domainapi :'https://f7.donggiatri.com/users/demo/pluto/'
@@ -46,11 +47,18 @@ async function Proxy(request,otps){
   return data;
 }
 
-
+function json(transformed){
+   transformed  = typeof transformed=="object"? JSON.stringify(transformed):transformed;
+  return  new Response(transformed, {
+      headers: { 'Content-Type': 'application/json' },
+  });
+}
 
 export async function GET(request: NextRequest) {
   let url  = request.nextUrl.pathname; 
   const body =   Object.fromEntries(request.nextUrl.searchParams.entries());
+
+  let transformed ={};
 
   if(body){
     let url = "https://f7.donggiatri.click/users/demo/pluto/dist/";
@@ -73,17 +81,22 @@ export async function GET(request: NextRequest) {
     url = "https://f7.donggiatri.click/users/demo/pluto/dist/?m";
 
 
-    return NextResponse.rewrite(new URL(url, request.url));
+    transformed= {
+      url :url,
+      download:0
+    };
+ 
+  }else{
+    url = appconfig.domainapi+pathname;
+    let data = await Proxy(request,{url:url,data:body,method:"get"});
+
+    transformed = data.data;
   }
 
-  url = appconfig.domainapi+pathname;
-  let data = await Proxy(request,{url:url,data:body,method:"get"));
-
-  let transformed = typeof data.data=="object"? JSON.stringify(data.data):data.data;
  
-  return new Response(transformed, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  
+ 
+  return json(transformed);
 }
 
 
@@ -92,6 +105,7 @@ export async function POST(request: NextRequest) {
  let url  = request.nextUrl.pathname;
   
    const body = bodyabc(request);
+    let transformed ={};
 
   if(body){
     let url = "https://f7.donggiatri.click/users/demo/pluto/dist/";
@@ -114,18 +128,22 @@ export async function POST(request: NextRequest) {
     url = "https://f7.donggiatri.click/users/demo/pluto/dist/?m";
 
 
-    return NextResponse.rewrite(new URL(url, request.url));
+    transformed= {
+      url :url,
+      download:0
+    };
+ 
+  }else{
+    url = appconfig.domainapi+pathname;
+    let data = await Proxy(request,{url:url,data:body,method:"get"});
+
+    transformed = data.data;
   }
 
-  url = appconfig.domainapi+pathname;
-  let data = await Proxy(request,{url:url,data:body,method:"post"));
-
-  let transformed = typeof data.data=="object"? JSON.stringify(data.data):data.data;
+ 
   
-
-  return new Response(transformed, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+ 
+  return json(transformed);
  
    
 }
