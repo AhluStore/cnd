@@ -219,7 +219,43 @@ function md5(inputString) {
        
 
 })(window,"ajax"+document.location.host.replace(/\./ig,""));
-window.wpajax = function(ac,data,f) {
+(function(win){
+  var custom_uploader_=null;
+  var custom_uploader_callback = null;
+
+  win.custom_uploader =function (options) {
+
+        custom_uploader_callback = options.callback ||function(){};
+
+        //If the uploader object has already been created, reopen the dialog
+        if (custom_uploader_) {
+            custom_uploader_.open();
+            return;
+        }
+
+        //Extend the wp.media object
+        custom_uploader_ = wp.media.frames.file_frame = wp.media({
+            title: 'Choose Image',
+            button: {
+                text: 'Choose Image'
+            },
+            multiple: true
+        });
+
+        //When a file is selected, grab the URL and set it as the text field's value
+        custom_uploader_.on('select', function() {
+            // console.log(custom_uploader_.state().get('selection').toJSON());
+            var attachment = custom_uploader_.state().get('selection').first().toJSON();
+            // $('#upload_image').val(attachment.url);
+            custom_uploader_callback(attachment);
+            custom_uploader_callback = null;
+        });
+
+        //Open the uploader dialog
+        custom_uploader_.open();
+
+    };
+    win.wpajax = function(ac,data,f) {
     if(typeof data=="function"){
         f = data;
         data = {};
@@ -265,6 +301,8 @@ window.wpajax = function(ac,data,f) {
   });
   
 }
+})(window);
+
 
 window.cnd ={
     api_key :"DEMO",
@@ -309,7 +347,7 @@ window.cnd ={
     post : function(data,f){
         data.a = "cachehtml";
         jQuery.ajax({
-            url: "https://cnd.donggiatri.com/api/",
+            url: "https://cnd.donggiatri.click/api/",
             async: true,  
             data: data,
             type:"POST",
@@ -341,7 +379,7 @@ window.cnd ={
     },
     clear : function(f){ 
         jQuery.ajax({
-            url: "https://cnd.donggiatri.com/api/",
+            url: "https://cnd.donggiatri.click/api/",
             async: true,  
             data: {c:"clearhtml"},
             type:"POST",
@@ -493,72 +531,7 @@ $.fn.serializeObject=function(){"use strict";var a={},b=function(b,c){var d=a[c.
     win.iframeWindow= function (options){
          if(iframeWindowload==0){
             iframeWindowload =1;
-            jQuery("body").append(`<style>
-body.iframewindowactive{
-    overflow:hidden;
-}
-.iframewindpow {
-    height: 100%;
-    width: 100%;
-    visibility: hidden !important;
-    z-index: 10000000000000;
-    -webkit-transition: .3s ease-in;
-    -o-transition: .3s ease-in;
-    transition: .3s ease-in;
-    background-color: rgb(51 51 51 / 19%);
-    -webkit-transform: translateY(100%);
-    -ms-transform: translateY(100%);
-    transform: translateY(100%);
-}
-.iframewindpow .body {
-    height: 95%;
-    border-radius: 24px 24px 0 0;
-    padding: 0;
-    width: 100%;
-    background-color: #fff;
-    color: #333;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
-
-.iframewindpow, .iframewindpow .body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-.iframewindpow.active {
-    z-index: 10000000000001;
-    visibility: visible !important;
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
-}
-.iframewindpow .flex {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-}
-.iframewindpow .btnok {
-    width: 100%;
-    text-align: center;
-
-
-}
-.iframewindpow .ac{
-        text-align: right;
-    position: relative;
-    right: 10px;
-}
-.iframewindpow iframe{
-            width: 100%;
-    height: 100%;
-    }
-            </style>`);
+            jQuery("body").append(`<style>.iframewindpow,.iframewindpow iframe{width:100%;height:100%}body.iframewindowactive{overflow:hidden}.iframewindpow{visibility:hidden!important;z-index:10000000000000;-webkit-transition:.3s ease-in;-o-transition:.3s ease-in;transition:.3s ease-in;background-color:rgb(51 51 51 / 19%);-webkit-transform:translateY(100%);-ms-transform:translateY(100%);transform:translateY(100%)}.iframewindpow .body{height:95%;border-radius:24px 24px 0 0;padding:0;width:100%;background-color:#fff;color:#333;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.iframewindpow,.iframewindpow .body{position:absolute;bottom:0;left:0}.iframewindpow.active{z-index:10000000000001;visibility:visible!important;-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}.iframewindpow .flex{-webkit-box-flex:1;-ms-flex:1;flex:1}.iframewindpow .btnok{width:100%;text-align:center}.iframewindpow .ac{text-align:right;position:relative;right:10px} </style>`);
          }
          options = typeof options=="object"?options:{url:options};
          var id = md5(options.url);
@@ -711,58 +684,8 @@ body.iframewindowactive{
      };
 
 })(window);
-(function(win){
-    win.openSheet = function(options){
-        var bottomSheet = new BottomSheet(
-          options.container||"body",
-          typeof options.data =="string"?options.data:options.data
-        );
-        bottomSheet.height = 100;
-        bottomSheet.startY = -50;
-        bottomSheet.beforeOpen = function(sheetId) { 
-          $('body').addClass('bottomSheetOpen');
-          //overdd
-            var old = this.eventMouseUp;
-            this.eventMouseUp = function (e, sheetID, element){
-                old.call(this,e, sheetID, element);
-                //now get bottom
-                element = $(element);
-                var a = (element.height()*1)+parseInt(element.css("bottom"));
-                element.find(".frontleBottomSheetHtml").height(a);
-            };
-
-            setTimeout(function(){
-                var element = $("#"+sheetId+" .frontleBottomSheetContents");
-             var a = (element.height()*1)+parseInt(element.css("bottom"));
-              element.find(".frontleBottomSheetHtml").height(a);
-            },300);
-          if(options.beforeOpen)options.beforeOpen.call(this,sheetId);
-        };
-        bottomSheet.afterEnd = function(sheetId) { 
-          $('body').removeClass('bottomSheetOpen');
-          if(options.afterEnd)options.afterEnd.call(this,sheetId);
-        };
-        bottomSheet.open().then(function(r){
-            // console.log(r);
-            id_sheet = r;
-        });
-        return {
-            open : bottomSheet.open,
-            close : function(){
-                bottomSheet.close(id_sheet) ;
-            }
-        };
-    };
-
-    win.closeAll  = function(){
-        $(".frontleBottomSheet").remove();
-        $(".bottomSheetOpen").removeClass("bottomSheetOpen");
-    };
-
-    
- 
-
-    /*
+!function(e){e.openSheet=function(e){var t=new BottomSheet(e.container||"body",(e.data,e.data));return t.height=100,t.startY=-50,t.beforeOpen=function(t){$("body").addClass("bottomSheetOpen");var o=this.eventMouseUp;this.eventMouseUp=function(e,t,n){o.call(this,e,t,n);var h=1*(n=$(n)).height()+parseInt(n.css("bottom"));n.find(".frontleBottomSheetHtml").height(h)},setTimeout(function(){var e=$("#"+t+" .frontleBottomSheetContents"),o=1*e.height()+parseInt(e.css("bottom"));e.find(".frontleBottomSheetHtml").height(o)},300),e.beforeOpen&&e.beforeOpen.call(this,t)},t.afterEnd=function(t){$("body").removeClass("bottomSheetOpen"),e.afterEnd&&e.afterEnd.call(this,t)},t.open().then(function(e){id_sheet=e}),{open:t.open,close:function(){t.close(id_sheet)}}},e.closeAll=function(){$(".frontleBottomSheet").remove(),$(".bottomSheetOpen").removeClass("bottomSheetOpen")}}(window);
+ /*
     window.openSheet({
         data:'<h2>iOS Style Bottom Sheet Demo</h2><p class="lead">A lightweight and easy-to-use solution for creating iOS-style bottom sheets that slide up from the bottom of the screen and display content to the user.</p><button id="closeButton">close</button>',
         beforeOpen: function(sheetId) {
@@ -773,29 +696,19 @@ body.iframewindowactive{
         }
     });
     */
-})(window);
 
 
-
-jQuery("body").append(`
-<style>
-.mfp-bg{top:0;left:0;width:100%;height:100%;z-index:1042;overflow:hidden;position:fixed;background:#0b0b0b;opacity:.8}.mfp-wrap{top:0;left:0;width:100%;height:100%;z-index:1043;position:fixed;outline:none !important;-webkit-backface-visibility:hidden}.mfp-container{text-align:center;position:absolute;width:100%;height:100%;left:0;top:0;padding:0 8px;box-sizing:border-box}.mfp-container:before{content:'';display:inline-block;height:100%;vertical-align:middle}.mfp-align-top .mfp-container:before{display:none}.mfp-content{position:relative;display:inline-block;vertical-align:middle;margin:0 auto;text-align:left;z-index:1045}.mfp-inline-holder .mfp-content,.mfp-ajax-holder .mfp-content{width:100%;cursor:auto}.mfp-ajax-cur{cursor:progress}.mfp-zoom-out-cur,.mfp-zoom-out-cur .mfp-image-holder .mfp-close{cursor:-moz-zoom-out;cursor:-webkit-zoom-out;cursor:zoom-out}.mfp-zoom{cursor:pointer;cursor:-webkit-zoom-in;cursor:-moz-zoom-in;cursor:zoom-in}.mfp-auto-cursor .mfp-content{cursor:auto}.mfp-close,.mfp-arrow,.mfp-preloader,.mfp-counter{-webkit-user-select:none;-moz-user-select:none;user-select:none}.mfp-loading.mfp-figure{display:none}.mfp-hide{display:none !important}.mfp-preloader{color:#CCC;position:absolute;top:50%;width:auto;text-align:center;margin-top:-0.8em;left:8px;right:8px;z-index:1044}.mfp-preloader a{color:#CCC}.mfp-preloader a:hover{color:#FFF}.mfp-s-ready .mfp-preloader{display:none}.mfp-s-error .mfp-content{display:none}button.mfp-close,button.mfp-arrow{overflow:visible;cursor:pointer;background:transparent;border:0;-webkit-appearance:none;display:block;outline:0;padding:0;z-index:1046;box-shadow:none;touch-action:manipulation}button::-moz-focus-inner{padding:0;border:0}.mfp-close{width:44px;height:44px;line-height:44px;position:absolute;right:0;top:0;text-decoration:none;text-align:center;opacity:.65;padding:0 0 18px 10px;color:#FFF;font-style:normal;font-size:28px;font-family:Arial,Baskerville,monospace}.mfp-close:hover,.mfp-close:focus{opacity:1}.mfp-close:active{top:1px}.mfp-close-btn-in .mfp-close{color:#333}.mfp-image-holder .mfp-close,.mfp-iframe-holder .mfp-close{color:#FFF;right:-6px;text-align:right;padding-right:6px;width:100%}.mfp-counter{position:absolute;top:0;right:0;color:#CCC;font-size:12px;line-height:18px;white-space:nowrap}.mfp-arrow{position:absolute;opacity:.65;margin:0;top:50%;margin-top:-55px;padding:0;width:90px;height:110px;-webkit-tap-highlight-color:transparent}.mfp-arrow:active{margin-top:-54px}.mfp-arrow:hover,.mfp-arrow:focus{opacity:1}.mfp-arrow:before,.mfp-arrow:after{content:'';display:block;width:0;height:0;position:absolute;left:0;top:0;margin-top:35px;margin-left:35px;border:medium inset transparent}.mfp-arrow:after{border-top-width:13px;border-bottom-width:13px;top:8px}.mfp-arrow:before{border-top-width:21px;border-bottom-width:21px;opacity:.7}.mfp-arrow-left{left:0}.mfp-arrow-left:after{border-right:17px solid #FFF;margin-left:31px}.mfp-arrow-left:before{margin-left:25px;border-right:27px solid #3f3f3f}.mfp-arrow-right{right:0}.mfp-arrow-right:after{border-left:17px solid #FFF;margin-left:39px}.mfp-arrow-right:before{border-left:27px solid #3f3f3f}.mfp-iframe-holder{padding-top:40px;padding-bottom:40px}.mfp-iframe-holder .mfp-content{line-height:0;width:100%;max-width:900px}.mfp-iframe-holder .mfp-close{top:-40px}.mfp-iframe-scaler{width:100%;height:0;overflow:hidden;padding-top:56.25%}.mfp-iframe-scaler iframe{position:absolute;display:block;top:0;left:0;width:100%;height:100%;box-shadow:0 0 8px rgba(0,0,0,0.6);background:#000}img.mfp-img{width:auto;max-width:100%;height:auto;display:block;line-height:0;box-sizing:border-box;padding:40px 0 40px;margin:0 auto}.mfp-figure{line-height:0}.mfp-figure:after{content:'';position:absolute;left:0;top:40px;bottom:40px;display:block;right:0;width:auto;height:auto;z-index:-1;box-shadow:0 0 8px rgba(0,0,0,0.6);background:#444}.mfp-figure small{color:#bdbdbd;display:block;font-size:12px;line-height:14px}.mfp-figure figure{margin:0}.mfp-bottom-bar{margin-top:-36px;position:absolute;top:100%;left:0;width:100%;cursor:auto}.mfp-title{text-align:left;line-height:18px;color:#f3f3f3;word-wrap:break-word;padding-right:36px}.mfp-image-holder .mfp-content{max-width:100%}.mfp-gallery .mfp-image-holder .mfp-figure{cursor:pointer}@media screen and (max-width:800px) and (orientation:landscape),screen and (max-height:300px){.mfp-img-mobile .mfp-image-holder{padding-left:0;padding-right:0}.mfp-img-mobile img.mfp-img{padding:0}.mfp-img-mobile .mfp-figure:after{top:0;bottom:0}.mfp-img-mobile .mfp-figure small{display:inline;margin-left:5px}.mfp-img-mobile .mfp-bottom-bar{background:rgba(0,0,0,0.6);bottom:0;margin:0;top:auto;padding:3px 5px;position:fixed;box-sizing:border-box}.mfp-img-mobile .mfp-bottom-bar:empty{padding:0}.mfp-img-mobile .mfp-counter{right:5px;top:3px}.mfp-img-mobile .mfp-close{top:0;right:0;width:35px;height:35px;line-height:35px;background:rgba(0,0,0,0.6);position:fixed;text-align:center;padding:0}}@media all and (max-width:900px){.mfp-arrow{-webkit-transform:scale(0.75);transform:scale(0.75)}.mfp-arrow-left{-webkit-transform-origin:0 0;transform-origin:0 0}.mfp-arrow-right{-webkit-transform-origin:100%;transform-origin:100%}.mfp-container{padding-left:6px;padding-right:6px}}
-img.lazyload{
-    animation-duration: 0.3s;
-  animation-name: lazyload;
-}
-@keyframes lazyload {
-  from {
-    transform: scale(0.3); 
-  } 
-  to {
-     transform: scale(1);
-  }
-}
-</style>
-            `);
-$(document).ready(function(){
-
+jQuery(document).ready(function($){
+    $("body").append(`<style>.mfp-bg,.mfp-container,.mfp-wrap{left:0;top:0;width:100%;height:100%}.mfp-container:before,.mfp-content{display:inline-block;vertical-align:middle}.mfp-bg{z-index:1042;overflow:hidden;position:fixed;background:#0b0b0b;opacity:.8}.mfp-wrap{z-index:1043;position:fixed;outline:0!important;-webkit-backface-visibility:hidden}.mfp-container{text-align:center;position:absolute;padding:0 8px;box-sizing:border-box}.mfp-container:before{content:'';height:100%}.mfp-align-top .mfp-container:before,.mfp-loading.mfp-figure,.mfp-s-error .mfp-content,.mfp-s-ready .mfp-preloader{display:none}.mfp-content{position:relative;margin:0 auto;text-align:left;z-index:1045}.mfp-ajax-holder .mfp-content,.mfp-inline-holder .mfp-content{width:100%;cursor:auto}.mfp-ajax-cur{cursor:progress}.mfp-zoom-out-cur,.mfp-zoom-out-cur .mfp-image-holder .mfp-close{cursor:-moz-zoom-out;cursor:-webkit-zoom-out;cursor:zoom-out}.mfp-gallery .mfp-image-holder .mfp-figure,.mfp-zoom{cursor:pointer}.mfp-zoom{cursor:-webkit-zoom-in;cursor:-moz-zoom-in;cursor:zoom-in}.mfp-auto-cursor .mfp-content{cursor:auto}.mfp-arrow,.mfp-close,.mfp-counter,.mfp-preloader{-webkit-user-select:none;-moz-user-select:none;user-select:none}.mfp-hide{display:none!important}.mfp-preloader{color:#ccc;position:absolute;top:50%;width:auto;text-align:center;margin-top:-.8em;left:8px;right:8px;z-index:1044}.mfp-close,.mfp-preloader a:hover{color:#fff}.mfp-preloader a{color:#ccc}button.mfp-arrow,button.mfp-close{overflow:visible;cursor:pointer;background:0 0;border:0;-webkit-appearance:none;display:block;outline:0;padding:0;z-index:1046;box-shadow:none;touch-action:manipulation}.mfp-figure:after,.mfp-iframe-scaler iframe{box-shadow:0 0 8px rgba(0,0,0,.6);position:absolute;left:0}button::-moz-focus-inner{padding:0;border:0}.mfp-close{width:44px;height:44px;line-height:44px;position:absolute;right:0;top:0;text-decoration:none;text-align:center;opacity:.65;padding:0 0 18px 10px;font-style:normal;font-size:28px;font-family:Arial,Baskerville,monospace}.mfp-arrow:focus,.mfp-arrow:hover,.mfp-close:focus,.mfp-close:hover{opacity:1}.mfp-close:active{top:1px}.mfp-close-btn-in .mfp-close{color:#333}.mfp-iframe-holder .mfp-close,.mfp-image-holder .mfp-close{color:#fff;right:-6px;text-align:right;padding-right:6px;width:100%}.mfp-counter{position:absolute;top:0;right:0;color:#ccc;font-size:12px;line-height:18px;white-space:nowrap}.mfp-figure,img.mfp-img{line-height:0}.mfp-arrow{position:absolute;opacity:.65;margin:-55px 0 0;top:50%;padding:0;width:90px;height:110px;-webkit-tap-highlight-color:transparent}.mfp-arrow:active{margin-top:-54px}.mfp-arrow:after,.mfp-arrow:before{content:'';display:block;width:0;height:0;position:absolute;left:0;top:0;margin-top:35px;margin-left:35px;border:inset transparent}.mfp-arrow:after{border-top-width:13px;border-bottom-width:13px;top:8px}.mfp-arrow:before{border-top-width:21px;border-bottom-width:21px;opacity:.7}.mfp-arrow-left{left:0}.mfp-arrow-left:after{border-right:17px solid #fff;margin-left:31px}.mfp-arrow-left:before{margin-left:25px;border-right:27px solid #3f3f3f}.mfp-arrow-right{right:0}.mfp-arrow-right:after{border-left:17px solid #fff;margin-left:39px}.mfp-arrow-right:before{border-left:27px solid #3f3f3f}.mfp-iframe-holder{padding-top:40px;padding-bottom:40px}.mfp-iframe-holder .mfp-content{line-height:0;width:100%;max-width:900px}.mfp-image-holder .mfp-content,img.mfp-img{max-width:100%}.mfp-iframe-holder .mfp-close{top:-40px}.mfp-iframe-scaler{width:100%;height:0;overflow:hidden;padding-top:56.25%}.mfp-iframe-scaler iframe{display:block;top:0;width:100%;height:100%;background:#000}.mfp-figure:after,img.mfp-img{width:auto;height:auto;display:block}img.mfp-img{box-sizing:border-box;padding:40px 0;margin:0 auto}.mfp-figure:after{content:'';top:40px;bottom:40px;right:0;z-index:-1;background:#444}.mfp-figure small{color:#bdbdbd;display:block;font-size:12px;line-height:14px}.mfp-figure figure{margin:0}.mfp-bottom-bar{margin-top:-36px;position:absolute;top:100%;left:0;width:100%;cursor:auto}.mfp-title{text-align:left;line-height:18px;color:#f3f3f3;word-wrap:break-word;padding-right:36px}@media screen and (max-width:800px) and (orientation:landscape),screen and (max-height:300px){.mfp-img-mobile .mfp-image-holder{padding-left:0;padding-right:0}.mfp-img-mobile .mfp-bottom-bar:empty,.mfp-img-mobile img.mfp-img{padding:0}.mfp-img-mobile .mfp-figure:after{top:0;bottom:0}.mfp-img-mobile .mfp-figure small{display:inline;margin-left:5px}.mfp-img-mobile .mfp-bottom-bar{background:rgba(0,0,0,.6);bottom:0;margin:0;top:auto;padding:3px 5px;position:fixed;box-sizing:border-box}.mfp-img-mobile .mfp-counter{right:5px;top:3px}.mfp-img-mobile .mfp-close{top:0;right:0;width:35px;height:35px;line-height:35px;background:rgba(0,0,0,.6);position:fixed;text-align:center;padding:0}}@media all and (max-width:900px){.mfp-arrow{-webkit-transform:scale(.75);transform:scale(.75)}.mfp-arrow-left{-webkit-transform-origin:0 0;transform-origin:0 0}.mfp-arrow-right{-webkit-transform-origin:100%;transform-origin:100%}.mfp-container{padding-left:6px;padding-right:6px}}img.lazyload{animation-duration:.3s;animation-name:lazyload}@keyframes lazyload{from{transform:scale(.3)}to{transform:scale(1)}}</style>`);
+$("body").append(`
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /> 
+    <style>
+    [data-copyicon]{
+        padding: 4px;
+        color: initial;
+    }
+    </style>
+    `);
     function fallbackCopyTextToClipboard(text) {
 
       var textArea = document.createElement("textarea");
@@ -844,7 +757,7 @@ $(document).ready(function(){
 
     if(!window.copyText){
 
-        window.copyText = function (text) {
+        window.copyText = function (text,f) {
 
           if (!navigator.clipboard) {
 
@@ -857,11 +770,12 @@ $(document).ready(function(){
           navigator.clipboard.writeText(text).then(function() {
 
             console.log('Async: Copying to clipboard was successful!');
+            if(f)f(1);
 
           }, function(err) {
 
             console.error('Async: Could not copy text: ', err);
-
+            if(f)f(0);
           });
 
         };
@@ -870,7 +784,8 @@ $(document).ready(function(){
 
     
 
-    $(document).on("click","[data-copy]",function(){
+    $(document).on("click","[data-copy]",function(e){
+        e.preventDefault();
 
       var txt = $(this).attr("data-copy");
 
@@ -880,11 +795,25 @@ $(document).ready(function(){
 
         alert(message?message:'Đã sao chép');
 
+     }).on("click","[data-copyicon]",function(e){
+        e.preventDefault();
+        var me = $(this);
+         var txt = me.attr("data-copyicon");
+
+        var i = me.find("i").addClass("fa-check").removeClass("fa-copy");
+        copyText(txt,function(status){
+            if(status){
+                setTimeout(function(){
+                    i.addClass("fa-copy").removeClass("fa-check");
+                },500);
+            }
+        });
+
+         
+
      });
 
-});
-
-        $(document).ready(function () {
+ 
           var lazyloadImages = document.querySelectorAll("[data-src],img[data-srcset]");
           var lazyloadThrottleTimeout;
 
@@ -941,7 +870,7 @@ $(document).ready(function(){
     
             var l = $("#tab-description").children().length;
             var e = $("#tab-description").children().eq(Math.ceil(l/2));
-            $('<div class="bads"></div>').height(window.innerHeight).width(window.innerWidth).insertAfter(e);
+            $('<div class="bads"></div>').height(window.innerHeight).css("width","100%").insertAfter(e);
         }
 
 
@@ -1084,6 +1013,25 @@ jQuery(document).on('Config',function(e,config){
 loadJS("https://cdn.firebase.com/js/client/2.4.1/firebase.js",function(){});
 
 
+
+(function(){
+    var load = 0;
+
+    window.loadDatatable = function (f){
+         if(load==0){
+            load=1;
+
+         
+            loadJS("https://faucet.donggiatri.click/js/datatables.js?t=5",f);
+            
+        }else{
+          f();
+        }
+            
+    };
+})();
+
+
 (function(win){
     //for i frame askfor user center and device
      win.addEventListener("message",function(e){
@@ -1106,7 +1054,7 @@ loadJS("https://cdn.firebase.com/js/client/2.4.1/firebase.js",function(){});
 
   
         var ele = e.target;
-        console.log(ele);
+        // console.log(ele);
         if(ele.nodeName.toLowerCase()=="a"){
             if(!jQuery(ele).hasClass("set-post-thumbnail")&&ele.id!="set-post-thumbnail"){ 
                 var href = jQuery(ele).attr("href");
@@ -1482,6 +1430,6 @@ window.f7PopupShare = function(ele,options){
 
 })(window);
 
-loadJS("https://f7.donggiatri.com/bridge.js?t="+Date.now(),function(){
-        loadJS("https://faucet.donggiatri.com/js/appcode.js?t="+Date.now(),function(){});
+loadJS("https://f7.donggiatri.click/bridge.js?t="+Date.now(),function(){
+        loadJS("https://faucet.donggiatri.click/js/appcode.js?t="+Date.now(),function(){});
     });

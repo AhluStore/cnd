@@ -113,8 +113,15 @@ button:active,.circle:active,.btn:active,.ripple:active,.fa:active,img:active,a:
     border-radius: 8px;
     background-color: #efefef;
     color: #333;
-    text-align: center;
+    margin:8px 0;
     min-height: 75px;
+    
+}
+.white-view.center{
+	  
+     
+    text-align: center;
+    
     display: flex;
     align-items: center;
     justify-content: center;
