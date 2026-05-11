@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
   const body =   Object.fromEntries(request.nextUrl.searchParams.entries());
 
   url = appconfig.domainapi+pathname;
-  let data = await Proxy(request,{url:url,data:body,method:"get"));
+  let data = await Proxy(request,{url:url,data:body,method:"get"});
 
   let transformed = typeof data.data=="object"? JSON.stringify(data.data):data.data;
  
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
  
 
   url = appconfig.domainapi+pathname;
-  let data = await Proxy(request,{url:url,data:body,method:"post"));
+  let data = await Proxy(request,{url:url,data:body,method:"post"});
 
   let transformed = typeof data.data=="object"? JSON.stringify(data.data):data.data;
   
